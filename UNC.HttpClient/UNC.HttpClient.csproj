@@ -23,4 +23,9 @@
   <ItemGroup>
     <PackageReference Include="UNC.Services" Version="*" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
 </Project>

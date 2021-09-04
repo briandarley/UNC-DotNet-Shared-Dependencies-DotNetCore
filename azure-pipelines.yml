@@ -1,0 +1,69 @@
+pool:
+  name: Default
+  demands:
+  - msbuild
+  - visualstudio
+
+
+#Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
+#Your build pipeline references an undefined variable named ‘Parameters.TestProjects’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
+#Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
+
+steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/UNC Extensions/*.csproj'
+    feedsToUse: 'select'
+    vstsFeed: '70d3ef79-7d7f-4802-9520-56423dbbef0b/97ba8d01-440f-4ea3-bf9f-db2f4e89d25d'
+#- task: DotNetCoreCLI@2
+#  displayName: Restore
+#  inputs:
+#    command: restore
+#    projects: '$(Parameters.RestoreBuildProjects)'
+#    vstsFeed: '70d3ef79-7d7f-4802-9520-56423dbbef0b/97ba8d01-440f-4ea3-bf9f-db2f4e89d25d'
+
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    projects: '$(Parameters.RestoreBuildProjects)'
+    arguments: '--configuration $(BuildConfiguration) --configuration $(BuildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: '$(Parameters.TestProjects)'
+    arguments: '--configuration $(BuildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+    zipAfterPublish: True
+  enabled: false
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet pack'
+  inputs:
+    command: pack
+    packagesToPack: 'UNC Extensions/UNC.Extensions.csproj'
+    nobuild: true
+    versioningScheme: byBuildNumber
+  continueOnError: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet push'
+  inputs:
+    command: push
+    publishVstsFeed: '70d3ef79-7d7f-4802-9520-56423dbbef0b/97ba8d01-440f-4ea3-bf9f-db2f4e89d25d'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()

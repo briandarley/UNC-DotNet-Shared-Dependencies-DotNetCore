@@ -12,11 +12,18 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: Restore
   inputs:
-    command: restore
-    projects: '$(Parameters.RestoreBuildProjects)'
+    command: 'restore'
+    projects: '**/UNC Extensions/*.csproj'
+    feedsToUse: 'select'
     vstsFeed: '70d3ef79-7d7f-4802-9520-56423dbbef0b/97ba8d01-440f-4ea3-bf9f-db2f4e89d25d'
+#- task: DotNetCoreCLI@2
+#  displayName: Restore
+#  inputs:
+#    command: restore
+#    projects: '$(Parameters.RestoreBuildProjects)'
+#    vstsFeed: '70d3ef79-7d7f-4802-9520-56423dbbef0b/97ba8d01-440f-4ea3-bf9f-db2f4e89d25d'
+
 
 - task: DotNetCoreCLI@2
   displayName: Build

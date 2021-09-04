@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ApiEndPoints.cs" />
+    <Compile Remove="EndPointAddress.cs" />
+    <Compile Remove="IApiEndPoints.cs" />
+    <Compile Remove="LogDependencyOptions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <ProjectReference Include="..\UNC.Services\UNC.Services.csproj" />
+  </ItemGroup>-->
+  <ItemGroup>
+    <PackageReference Include="UNC.Services" Version="*" />
+  </ItemGroup>
+</Project>

@@ -11,7 +11,9 @@
     <PackageReference Include="UNC.Extensions" Version="*" />
     <PackageReference Include="UNC.LogHandler" Version="*" />
   </ItemGroup>
-
+  <PropertyGroup>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
   <!--<ItemGroup>
     <ProjectReference Include="..\UNC Extensions\UNC.Extensions.csproj" />
     <ProjectReference Include="..\UNC.LogHandler\UNC.LogHandler.csproj" />

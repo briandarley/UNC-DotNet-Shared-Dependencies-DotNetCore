@@ -109,6 +109,29 @@ namespace UNC.Services
 
             return response;
         }
+        protected IErrorResponse LogError(string message, [CallerMemberName] string callerName = "", [CallerFilePath] string sourcePath = "", [CallerLineNumber] int sourceLineNumber = 0, bool includeFullTrace = true)
+        {
+            var logEntry = InitializeLogEntry(callerName, sourcePath, sourceLineNumber);
+            logEntry.Level = LogEventLevel.Error.ToString();
+
+            var sb = new StringBuilder(message);
+
+
+            if (includeFullTrace && FullTrace().ToList().Count > 0)
+            {
+                sb.AppendLine("Full trace follows...");
+                sb.AppendLine($"Trace: {string.Join(",", FullTrace().ToList())}");
+            }
+
+            logEntry.Message = sb.ToString();
+
+            _logger.Warning(logEntry.ToJson());
+
+            var errorMessage = $"{message}: {callerName}";
+            var response = new ErrorResponse(errorMessage);
+
+            return response;
+        }
         protected IInfoResponse LogInfo(string message, [CallerMemberName] string callerName = "", [CallerFilePath] string sourcePath = "", [CallerLineNumber] int sourceLineNumber = 0, bool includeFullTrace = false)
         {
             var logEntry = InitializeLogEntry(callerName, sourcePath, sourceLineNumber);

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 
@@ -44,7 +45,7 @@ namespace UNC.Extensions.General
 
             return StringComparer.OrdinalIgnoreCase.Equals(value, to);
         }
-        public static bool EndWithIgnoreCase(this string value, string to)
+        public static bool EndsWithIgnoreCase(this string value, string to)
         {
             if (value == to) return true;
             if (value.IsNullOrEmpty()) return false;
@@ -84,6 +85,29 @@ namespace UNC.Extensions.General
             return Regex.IsMatch(value, pattern);
 
         }
+
+
+        
+        public static bool IsValidProxyAddress(this string value)
+        {
+            try
+            {
+                if (value.IsNullOrEmpty()) return false;
+                if (!value.StartsWithIgnoreCase("smtp:") && Regex.IsMatch(value, @"^[a-zA-Z0-9]+\:"))
+                {
+                    //assume it's valid until you learn how to validate these
+                    return true;
+                }
+
+                return value.Substring(5).IsEmail();
+                
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
 
 
         public static bool IsEmail(this string value)

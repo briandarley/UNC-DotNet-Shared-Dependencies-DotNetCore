@@ -10,5 +10,6 @@ namespace UNC.HttpClient.EventHandlers
         public bool LogError { get; set; }
         public bool ExceptionAcknowledged { get; set; }
         public string Action { get; set; }
+        public string Message { get; set; }
     }
 }

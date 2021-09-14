@@ -25,7 +25,7 @@
       },
       "UNC.Services": {
         "type": "Direct",
-        "requested": "[2021.*, )",
+        "requested": "[*, )",
         "resolved": "2021.9.14.1",
         "contentHash": "yIqpPptgLnbIjgf0dhI3ahziKNmZ38fk321dLURYYl5YQ42ClJRlWDnHt07uNgCFP7wPB9px5U5Ne0HUIJW2Kw==",
         "dependencies": {

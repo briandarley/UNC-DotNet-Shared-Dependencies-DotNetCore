@@ -203,16 +203,14 @@ namespace UNC.HttpClient
         {
 
             var fullPath = string.Empty;
-            
+            HttpResponseMessage response = null;
             try
             {
                 LogBeginRequest();
-
                 
-
                 var content = SerializedObject(entity);
 
-                HttpResponseMessage response;
+                
 
                 if (LazyClient is null)
                 {
@@ -255,6 +253,7 @@ namespace UNC.HttpClient
                 {
                     response.EnsureSuccessStatusCode();
                 }
+
                 return response.IsSuccessStatusCode;
 
 
@@ -270,6 +269,20 @@ namespace UNC.HttpClient
                     Exception = ex,
                     Action = "PUT"
                 };
+
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
 
                 WebRequestErrorHandler?.Invoke(this, args);
 
@@ -298,6 +311,19 @@ namespace UNC.HttpClient
                     Exception = ex,
                     Action = "PUT"
                 };
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
 
                 WebRequestErrorHandler?.Invoke(this, args);
 
@@ -331,15 +357,12 @@ namespace UNC.HttpClient
         public async Task<T> Put<T>(string path = "", object entity = null, bool putByQueryParameter = false)
         {
             var fullPath = BaseAddress + path;
-            
+            HttpResponseMessage response = null;
             try
             {
 
                 LogBeginRequest();
-
                 
-
-                HttpResponseMessage response;
 
                 if (LazyClient is null)
                 {
@@ -396,6 +419,19 @@ namespace UNC.HttpClient
                     Action = "PUT"
                 };
 
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
                 WebRequestErrorHandler?.Invoke(this, args);
 
 
@@ -424,6 +460,20 @@ namespace UNC.HttpClient
                     Exception = ex,
                     Action = "PUT"
                 };
+
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
 
                 WebRequestErrorHandler?.Invoke(this, args);
 
@@ -454,16 +504,15 @@ namespace UNC.HttpClient
         {
 
             var fullPath = BaseAddress + path;
-            
+            HttpResponseMessage response = null;
+
             try
             {
                 LogBeginRequest();
 
                 
                 var content = SerializedObject(entity);
-
-                HttpResponseMessage response;
-
+                
                 if (LazyClient is null)
                 {
                     throw new Exception("LazyClient not initialized");
@@ -521,6 +570,20 @@ namespace UNC.HttpClient
                     Action = "POST"
                 };
 
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
+
                 WebRequestErrorHandler?.Invoke(this, args);
 
 
@@ -549,6 +612,20 @@ namespace UNC.HttpClient
                     Exception = ex,
                     Action = "POST"
                 };
+
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
 
                 WebRequestErrorHandler?.Invoke(this, args);
 
@@ -579,14 +656,12 @@ namespace UNC.HttpClient
         {
 
             var fullPath = BaseAddress + path;
-            
+            HttpResponseMessage response = null;
+
             try
             {
                 LogBeginRequest();
-
                 
-
-                HttpResponseMessage response;
 
                 if (LazyClient is null)
                 {
@@ -641,6 +716,20 @@ namespace UNC.HttpClient
                     Action = "POST"
                 };
 
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
+
                 WebRequestErrorHandler?.Invoke(this, args);
 
 
@@ -670,6 +759,20 @@ namespace UNC.HttpClient
                     Action = "POST"
                 };
 
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
+
                 WebRequestErrorHandler?.Invoke(this, args);
 
                 var message = $"Failed to POST to endpoint {fullPath}.";
@@ -697,7 +800,8 @@ namespace UNC.HttpClient
         public async Task<T> GetEntity<T>(string path = "")
         {
             var fullPath = BaseAddress + path;
-            
+            HttpResponseMessage response = null;
+
             try
             {
                 LogBeginRequest();
@@ -710,7 +814,7 @@ namespace UNC.HttpClient
                 var client = LazyClient.Value();
 
                 LogWebRequestPath(fullPath);
-                var response = await client.GetAsync(fullPath);
+                response = await client.GetAsync(fullPath);
 
                 if (response.StatusCode == HttpStatusCode.NotFound
                     && typeof(T).IsGenericType
@@ -752,7 +856,7 @@ namespace UNC.HttpClient
 
                 var client = LazyClient.Value();
 
-                var response = await client.GetAsync(fullPath);
+                response = await client.GetAsync(fullPath);
 
                 response.EnsureSuccessStatusCode();
 
@@ -776,6 +880,20 @@ namespace UNC.HttpClient
                     Exception = ex,
                     Action = "GET"
                 };
+
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
 
                 WebRequestErrorHandler?.Invoke(this, args);
 
@@ -804,6 +922,20 @@ namespace UNC.HttpClient
                     Exception = ex,
                     Action = "GET"
                 };
+
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
 
                 WebRequestErrorHandler?.Invoke(this, args);
 
@@ -834,7 +966,7 @@ namespace UNC.HttpClient
         public async Task<string> GetRaw(string path = "")
         {
             var fullPath = BaseAddress + path;
-            
+            HttpResponseMessage response = null;
             try
             {
                 LogBeginRequest();
@@ -848,7 +980,7 @@ namespace UNC.HttpClient
                 var client = LazyClient.Value();
 
                 LogWebRequestPath(fullPath);
-                var response = await client.GetAsync(fullPath);
+                response = await client.GetAsync(fullPath);
 
                 if (DefaultEnsureSuccessStatusCode)
                 {
@@ -878,7 +1010,7 @@ namespace UNC.HttpClient
 
                 var client = LazyClient.Value();
 
-                var response = await client.GetAsync(fullPath);
+                response = await client.GetAsync(fullPath);
 
                 response.EnsureSuccessStatusCode();
 
@@ -895,6 +1027,20 @@ namespace UNC.HttpClient
                     Exception = ex,
                     Action = "GET"
                 };
+
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
 
                 WebRequestErrorHandler?.Invoke(this, args);
 
@@ -923,6 +1069,20 @@ namespace UNC.HttpClient
                     Exception = ex,
                     Action = "GET"
                 };
+
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
 
                 WebRequestErrorHandler?.Invoke(this, args);
 
@@ -1001,7 +1161,7 @@ namespace UNC.HttpClient
         public async Task<bool> DeleteEntity(string path = "")
         {
             var fullPath = BaseAddress + path;
-            
+            HttpResponseMessage response = null;
             try
             {
                 LogBeginRequest();
@@ -1015,19 +1175,17 @@ namespace UNC.HttpClient
                     throw new Exception("LazyClient not initialized");
                 }
 
-                using (var client = LazyClient.Value())
+                using var client = LazyClient.Value();
+
+                LogWebRequestPath(fullPath);
+
+                response = await client.DeleteAsync(fullPath);
+
+                if (DefaultEnsureSuccessStatusCode)
                 {
-
-                    LogWebRequestPath(fullPath);
-
-                    var response = await client.DeleteAsync(fullPath);
-
-                    if (DefaultEnsureSuccessStatusCode)
-                    {
-                        response.EnsureSuccessStatusCode();
-                    }
-                    return response.IsSuccessStatusCode;
+                    response.EnsureSuccessStatusCode();
                 }
+                return response.IsSuccessStatusCode;
             }
             catch (Exception ex) when (ex.InnerException != null && ex.InnerException.Message.Contains("A connection with the server could not be established"))
             {
@@ -1037,6 +1195,20 @@ namespace UNC.HttpClient
                     Exception = ex,
                     Action = "DELETE"
                 };
+
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
 
                 WebRequestErrorHandler?.Invoke(this, args);
 
@@ -1062,6 +1234,20 @@ namespace UNC.HttpClient
                     Exception = ex,
                     Action = "DELETE"
                 };
+
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
 
                 WebRequestErrorHandler?.Invoke(this, args);
 
@@ -1146,8 +1332,8 @@ namespace UNC.HttpClient
         {
 
             var fullPath = string.Empty;
+            HttpResponseMessage response = null;
 
-            
             try
             {
                 LogBeginRequest();
@@ -1155,7 +1341,7 @@ namespace UNC.HttpClient
                 
                 var content = SerializedObject(entity);
 
-                HttpResponseMessage response;
+                
 
                 if (LazyClient is null)
                 {
@@ -1218,6 +1404,20 @@ namespace UNC.HttpClient
                     Action = "PATCH"
                 };
 
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
+
                 WebRequestErrorHandler?.Invoke(this, args);
 
 
@@ -1247,6 +1447,20 @@ namespace UNC.HttpClient
                     Action = "PATCH"
                 };
 
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
+
                 WebRequestErrorHandler?.Invoke(this, args);
 
                 var message = $"Failed to PATCH to endpoint {fullPath}.";
@@ -1275,17 +1489,14 @@ namespace UNC.HttpClient
         public async Task<T> Patch<T>(string path = "", object entity = null, bool putByQueryParameter = false)
         {
             var fullPath = BaseAddress + path;
-            
-            
+
+            HttpResponseMessage response = null;
 
             try
             {
                 LogBeginRequest();
                 
                 
-
-                HttpResponseMessage response;
-
                 if (LazyClient is null)
                 {
                     throw new Exception("LazyClient not initialized");
@@ -1344,6 +1555,20 @@ namespace UNC.HttpClient
                     Action = "PATCH"
                 };
 
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
+
                 WebRequestErrorHandler?.Invoke(this, args);
 
 
@@ -1372,6 +1597,20 @@ namespace UNC.HttpClient
                     Exception = ex,
                     Action = "PATCH"
                 };
+
+
+                try
+                {
+                    if (response != null)
+                    {
+                        var contents = await response.Content.ReadAsStringAsync();
+                        args.Message = contents;
+                    }
+                }
+                catch
+                {
+                    //ignore
+                }
 
                 WebRequestErrorHandler?.Invoke(this, args);
 

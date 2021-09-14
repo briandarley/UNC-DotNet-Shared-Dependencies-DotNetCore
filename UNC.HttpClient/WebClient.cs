@@ -51,7 +51,7 @@ namespace UNC.HttpClient
                 {
                     throw new ArgumentException("Invalid URL, unable to resolve path");
                 }
-
+                
                 _baseAddress = value;
             }
 

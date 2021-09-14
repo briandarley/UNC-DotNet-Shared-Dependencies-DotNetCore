@@ -25,9 +25,9 @@
       },
       "UNC.Services": {
         "type": "Direct",
-        "requested": "[*, )",
-        "resolved": "2021.9.4.3",
-        "contentHash": "QpxUkteTb+UZsJ3WXG4oHgmVZGVP/sMx7xUwpTAgSUJFLiC+UR6svgXKLfEPROFAB24Aoh+WROCqfYFj0TvFyQ==",
+        "requested": "[2021.*, )",
+        "resolved": "2021.9.14.1",
+        "contentHash": "yIqpPptgLnbIjgf0dhI3ahziKNmZ38fk321dLURYYl5YQ42ClJRlWDnHt07uNgCFP7wPB9px5U5Ne0HUIJW2Kw==",
         "dependencies": {
           "AutoMapper": "10.1.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.0",

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace UNC.Extensions.General
 {
@@ -66,7 +68,42 @@ namespace UNC.Extensions.General
             });
         }
 
+        private class InterfaceContractResolver : DefaultContractResolver
+        {
+            private readonly Type _InterfaceType;
+            public InterfaceContractResolver(Type InterfaceType)
+            {
+                _InterfaceType = InterfaceType;
+            }
 
+            protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+            {
+                //IList<JsonProperty> properties = base.CreateProperties(type, memberSerialization);
+                IList<JsonProperty> properties = base.CreateProperties(_InterfaceType, memberSerialization);
+                return properties;
+            }
+        }
+
+        public static string ToJson<T>(this T value,bool shallow) where T : class
+        {
+            //we have to use Newtonsoft here because JsonSerializer doesn't support reference loop handling
+            if (value == null)
+            {
+                return string.Empty;
+            }
+
+            var settings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+            };
+            if (shallow)
+            {
+                settings.ContractResolver = new InterfaceContractResolver(typeof(T));
+            }
+            return JsonConvert.SerializeObject(value, Formatting.None, settings);
+        }
         /// <summary>
         /// Take object, serialize to JSON, save to specified fullPath
         /// </summary>

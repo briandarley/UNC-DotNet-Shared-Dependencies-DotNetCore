@@ -833,7 +833,11 @@ namespace UNC.HttpClient
                 {
                     var rawResponse = await response.Content.ReadAsStringAsync();
 
-                    return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(rawResponse);
+                    if (typeof(T).IsPrimitive || typeof(T) == typeof(string))
+                    {
+                        return (T)(object) rawResponse;
+                    }
+                    return JsonConvert.DeserializeObject<T>(rawResponse);
 
                 }
 

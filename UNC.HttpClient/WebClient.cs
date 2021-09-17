@@ -1294,7 +1294,7 @@ namespace UNC.HttpClient
 
                 var contents = SerializedObject(entity);
                 if (!PreventLogging)
-                    LogWarning($"Message Payload: {contents}");
+                    LogInfo($"Message Payload: {contents}");
 
             }
             catch

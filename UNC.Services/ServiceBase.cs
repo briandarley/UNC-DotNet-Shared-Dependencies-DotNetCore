@@ -125,7 +125,7 @@ namespace UNC.Services
 
             logEntry.Message = sb.ToString();
 
-            _logger.Warning(logEntry.ToJson());
+            _logger.Error(logEntry.ToJson());
 
             var errorMessage = $"{message}: {callerName}";
             var response = new ErrorResponse(errorMessage);
@@ -148,10 +148,10 @@ namespace UNC.Services
 
             logEntry.Message = sb.ToString();
 
-            _logger.Warning(logEntry.ToJson());
+            _logger.Information(logEntry.ToJson());
 
-            var warningMessage = $"{message}: {callerName}";
-            var response = new InfoResponse(warningMessage);
+            var infoMessage = $"{message}: {callerName}";
+            var response = new InfoResponse(infoMessage);
 
             return response;
 
@@ -179,8 +179,8 @@ namespace UNC.Services
 
             _logger.Debug(logEntry.ToJson());
 
-            var warningMessage = $"{message}: {callerName}";
-            var response = new DebugResponse(warningMessage);
+            var debugMessage = $"{message}: {callerName}";
+            var response = new DebugResponse(debugMessage);
 
             return response;
         }

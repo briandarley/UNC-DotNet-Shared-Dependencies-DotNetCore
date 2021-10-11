@@ -10,7 +10,7 @@
       },
       "UNC.Services": {
         "type": "Direct",
-        "requested": "[2021.10.11.5, )",
+        "requested": "[*, )",
         "resolved": "2021.10.11.5",
         "contentHash": "ylnjITPbghpBOjJIsQ6+MFYFA3s9ecogDPyMsYJwVnSDzYnT/kWrmwGDCj/9+nNUDmX+uFrSe/gx6jCbc+QcCw==",
         "dependencies": {

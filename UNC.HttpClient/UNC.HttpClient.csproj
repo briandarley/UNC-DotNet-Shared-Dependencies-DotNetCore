@@ -15,12 +15,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="UNC.Services" Version="2021.10.11.5" />
+    <PackageReference Include="UNC.Services" Version="*" />
   </ItemGroup>
-
-  <!--<ItemGroup>
-    <ProjectReference Include="..\UNC.Services\UNC.Services.csproj" />
-  </ItemGroup>-->
 
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>

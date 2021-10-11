@@ -110,16 +110,6 @@ namespace UNC.LogHandler
             if (_disposed)
                 return;
 
-            try
-            {
-                //StackifyLib.Utils.StackifyAPILogger.Log("Serilog target closing");
-                //_logClient.Close();
-                //StackifyLib.Internal.Metrics.MetricClient.StopMetricsQueue("Serilog CloseTarget");
-            }
-            catch (Exception ex)
-            {
-                //StackifyLib.Utils.StackifyAPILogger.Log("Serilog target closing error: " + ex.ToString());
-            }
             _disposed = true;
         }
 

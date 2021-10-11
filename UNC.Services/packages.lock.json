@@ -14,7 +14,7 @@
       },
       "UNC.Extensions": {
         "type": "Direct",
-        "requested": "[2021.10.11.1, )",
+        "requested": "[*, )",
         "resolved": "2021.10.11.1",
         "contentHash": "KFWMAFEKsZtp2TYA8HyiiI44kv2qTXWHQa9BLXFyp89VG7tipoXmt2pK/gkY0d1AmKy0/6oku0HDNnnCM6/xgQ==",
         "dependencies": {
@@ -25,7 +25,7 @@
       },
       "UNC.LogHandler": {
         "type": "Direct",
-        "requested": "[2021.10.11.1, )",
+        "requested": "[*, )",
         "resolved": "2021.10.11.1",
         "contentHash": "YQpuFEnVmFXGsLuunkOBkO68KqDiuHPBdN4m/PGe5abPmCG9jZB+hGwA5yW+BLQUOClrmawMFGiccZkvtB6DAA==",
         "dependencies": {

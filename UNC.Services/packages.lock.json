@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETCoreApp,Version=v5.0": {
+    ".NETCoreApp,Version=v3.1": {
       "AutoMapper": {
         "type": "Direct",
         "requested": "[10.1.1, )",
@@ -14,9 +14,9 @@
       },
       "UNC.Extensions": {
         "type": "Direct",
-        "requested": "[*, )",
-        "resolved": "2021.10.10.3",
-        "contentHash": "E2/s6K2vUKaBk0pXycZLt/x5cMO2dnFuykE6O/XZ4jgSIjnwElE3PT89xXJfUdHfqnD0ZOu12VJqypGIMgCxBg==",
+        "requested": "[2021.10.11.1, )",
+        "resolved": "2021.10.11.1",
+        "contentHash": "KFWMAFEKsZtp2TYA8HyiiI44kv2qTXWHQa9BLXFyp89VG7tipoXmt2pK/gkY0d1AmKy0/6oku0HDNnnCM6/xgQ==",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.10",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.10",
@@ -25,9 +25,9 @@
       },
       "UNC.LogHandler": {
         "type": "Direct",
-        "requested": "[*, )",
-        "resolved": "2021.10.10.1",
-        "contentHash": "t6Lrj9iyw41XDf5PzSP/CA17ZY8TsGljvR9dbUn03j0yL8kehwfEa1LAXiEXtzJ9qQob62jEdJA+XNiSx8SJrQ==",
+        "requested": "[2021.10.11.1, )",
+        "resolved": "2021.10.11.1",
+        "contentHash": "YQpuFEnVmFXGsLuunkOBkO68KqDiuHPBdN4m/PGe5abPmCG9jZB+hGwA5yW+BLQUOClrmawMFGiccZkvtB6DAA==",
         "dependencies": {
           "Serilog.AspNetCore": "4.1.0",
           "Serilog.Enrichers.Thread": "3.1.0"
@@ -183,7 +183,8 @@
           "Microsoft.Extensions.DependencyInjection": "5.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
-          "Microsoft.Extensions.Options": "5.0.0"
+          "Microsoft.Extensions.Options": "5.0.0",
+          "System.Diagnostics.DiagnosticSource": "5.0.0"
         }
       },
       "Microsoft.Extensions.Logging.Abstractions": {
@@ -250,8 +251,8 @@
         "resolved": "4.1.0",
         "contentHash": "qRdEkjX10VJ5Cb3B9q/Q/tv+0ntDxAIA1YbOmmNMlkha1TU0ckK5b73eBYMNNLMAU92ofrzOEuIJEc6Q+Q1Z2A==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "5.0.0",
-          "Microsoft.Extensions.Logging": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection": "3.1.8",
+          "Microsoft.Extensions.Logging": "3.1.8",
           "Serilog": "2.10.0",
           "Serilog.Extensions.Hosting": "4.1.2",
           "Serilog.Formatting.Compact": "1.1.0",

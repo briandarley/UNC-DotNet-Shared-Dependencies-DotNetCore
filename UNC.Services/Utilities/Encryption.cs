@@ -120,8 +120,8 @@ namespace UNC.Services.Utilities
 
                 var list = new List<KeyValuePair<string, string>>
                 {
-                    new("Public", pubKey),
-                    new("Private", privKey)
+                    new KeyValuePair<string, string>("Public", pubKey),
+                    new KeyValuePair<string, string>("Private", privKey)
                 };
 
                 return CollectionResponse(list);

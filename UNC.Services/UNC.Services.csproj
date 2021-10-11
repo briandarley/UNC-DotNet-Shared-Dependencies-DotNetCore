@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0</TargetFrameworks>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     
-    <PackageReference Include="UNC.Extensions" Version="*" />
-    <PackageReference Include="UNC.LogHandler" Version="*" />
+    <PackageReference Include="UNC.Extensions" Version="2021.10.11.1" />
+    <PackageReference Include="UNC.LogHandler" Version="2021.10.11.1" />
   </ItemGroup>
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>

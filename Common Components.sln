@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UNC.LogHandler", "UNC.LogHa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UNC.Services", "UNC.Services\UNC.Services.csproj", "{834B35E7-DBBA-456C-8770-9E2026190136}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNC.Cryptography", "UNC.Cryptography\UNC.Cryptography.csproj", "{BBE4CEB9-5383-42E6-8546-2B934A4A9204}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{834B35E7-DBBA-456C-8770-9E2026190136}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{834B35E7-DBBA-456C-8770-9E2026190136}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{834B35E7-DBBA-456C-8770-9E2026190136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBE4CEB9-5383-42E6-8546-2B934A4A9204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBE4CEB9-5383-42E6-8546-2B934A4A9204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBE4CEB9-5383-42E6-8546-2B934A4A9204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBE4CEB9-5383-42E6-8546-2B934A4A9204}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

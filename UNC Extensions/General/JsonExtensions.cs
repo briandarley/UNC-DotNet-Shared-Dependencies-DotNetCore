@@ -46,9 +46,9 @@ namespace UNC.Extensions.General
                 if (!json.IsJson()) return false;
 
                 var token = JObject.Parse(json);
-                
+
                 var entity = token.GetValue(property, StringComparison.OrdinalIgnoreCase)?.Value<object>();
-                
+
                 return entity != null;
 
             }
@@ -62,6 +62,25 @@ namespace UNC.Extensions.General
             }
 
             return false;
+        }
+
+        public static T JsonPropertyValue<T>(this string json, string property)
+        {
+            if (!json.IsJson())
+            {
+                throw new ArgumentException("json is not properly formatted");
+            }
+
+            var token = JObject.Parse(json);
+            JToken tokenValue = token.GetValue(property, StringComparison.OrdinalIgnoreCase);
+            if (tokenValue is null)
+            {
+                return default;
+            }
+            var entity = tokenValue.Value<T>();
+
+            return entity;
+
         }
 
         public static string JsonAppendProperty(this string json, string property, string value)
@@ -123,7 +142,7 @@ namespace UNC.Extensions.General
             }
         }
 
-        public static string ToJson<T>(this T value,bool shallow) where T : class
+        public static string ToJson<T>(this T value, bool shallow) where T : class
         {
             //we have to use Newtonsoft here because JsonSerializer doesn't support reference loop handling
             if (value == null)

@@ -39,6 +39,45 @@ namespace UNC.Extensions.General
         }
 
 
+        public static bool JsonContainsProperty(this string json, string property)
+        {
+            try
+            {
+                if (!json.IsJson()) return false;
+
+                var token = JObject.Parse(json);
+                
+                var entity = token.GetValue(property, StringComparison.OrdinalIgnoreCase)?.Value<object>();
+                
+                return entity != null;
+
+            }
+            catch (JsonReaderException jex)
+            {
+                Console.WriteLine(jex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return false;
+        }
+
+        public static string JsonAppendProperty(this string json, string property, string value)
+        {
+            if (!json.IsJson())
+            {
+                throw new ArgumentException("json is not properly formatted");
+            };
+
+            var token = JObject.Parse(json);
+            token.Add(property, value);
+
+            return token.ToString(Newtonsoft.Json.Formatting.None);
+
+        }
+
         /// <summary>
         /// Read json from specified fullPath to designated Type T
         /// </summary>

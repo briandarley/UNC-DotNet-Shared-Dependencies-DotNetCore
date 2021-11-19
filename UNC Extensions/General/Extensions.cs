@@ -35,6 +35,14 @@ namespace UNC.Extensions.General
         {
             return !value.IsEmpty();
         }
+        public static bool ContainsIgnoreCase(this string value, string to)
+        {
+            if (value == to) return true;
+            if (value.IsNullOrEmpty()) return false;
+            if (to.IsNullOrEmpty()) return false;
+
+            return value.Contains(to, StringComparison.CurrentCultureIgnoreCase);
+        }
         public static bool EqualsIgnoreCase(this string value, string to)
         {
             if (value == to) return true;

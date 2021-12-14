@@ -86,13 +86,25 @@ namespace UNC.HttpClient
 
             //Ignore Cert Errors
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+
+
+
+           
+            
+
+
             //Not trying to get cute, we can't pass the base address in most cases so we use the lazy instantiation to get it when we perform an actual request. 
             LazyClient = new Lazy<Func<System.Net.Http.HttpClient>>(() =>
             {
+                var handler = new HttpClientHandler
+                {
+                    ClientCertificateOptions = ClientCertificateOption.Manual,
+                    ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
+                };
 
                 System.Net.Http.HttpClient GetClient()
                 {
-                    var client = new System.Net.Http.HttpClient
+                    var client = new System.Net.Http.HttpClient(handler)
                     {
                         Timeout = TimeSpan.FromHours(Timeout),
                         BaseAddress = new Uri(BaseAddress),
@@ -349,11 +361,7 @@ namespace UNC.HttpClient
 
 
         }
-
-
-
-
-
+        
         public async Task<T> Put<T>(string path = "", object entity = null, bool putByQueryParameter = false)
         {
             var fullPath = BaseAddress + path;
@@ -1282,7 +1290,7 @@ namespace UNC.HttpClient
         private string SerializedObject(object entity)
         {
             //System.Text.Json does not support reference loop handling ... wtf .. we must rely on NewtonSoft to handle this then. so much for ridding ourselves of dependencies..
-            return Newtonsoft.Json.JsonConvert.SerializeObject(entity, Newtonsoft.Json.Formatting.None, new Newtonsoft.Json.JsonSerializerSettings { ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore });
+            return JsonConvert.SerializeObject(entity, Formatting.None, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
 
         }
 

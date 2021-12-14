@@ -99,7 +99,8 @@ namespace UNC.HttpClient
                 var handler = new HttpClientHandler
                 {
                     ClientCertificateOptions = ClientCertificateOption.Manual,
-                    ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
+                    //ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true,
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
                 };
 
                 System.Net.Http.HttpClient GetClient()

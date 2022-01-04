@@ -272,6 +272,10 @@ namespace UNC.Services
         {
             return new SuccessResponse(message);
         }
+        protected virtual NoWorkPerformedResponse NoWorkPerformedResponse(string message = "")
+        {
+            return new NoWorkPerformedResponse(message);
+        }
         protected virtual IResponse ErrorResponse(string error)
         {
             return new ErrorResponse(error);

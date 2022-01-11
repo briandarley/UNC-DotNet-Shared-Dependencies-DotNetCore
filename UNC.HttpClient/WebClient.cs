@@ -20,7 +20,7 @@ using UNC.Services.Responses;
 
 namespace UNC.HttpClient
 {
-    public class WebClient : ServiceBase, IWebClient
+    public class WebClient : ServiceBase, IWebClient,IDisposable
     {
         public TokenResponse AuthResponse { get; set; }
         private readonly string _clientId;
@@ -1188,7 +1188,7 @@ namespace UNC.HttpClient
                     throw new Exception("LazyClient not initialized");
                 }
 
-                using var client = LazyClient.Value();
+                var client = LazyClient.Value();
 
                 LogWebRequestPath(fullPath);
 
@@ -1654,6 +1654,11 @@ namespace UNC.HttpClient
         public override string ToString()
         {
             return _authSettings.ToString();
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 

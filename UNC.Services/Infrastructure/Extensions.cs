@@ -244,7 +244,7 @@ namespace UNC.Services.Infrastructure
         public static string Decompress(this string compressedString)
         {
             byte[] decompressedBytes;
-
+            
             var compressedStream = new MemoryStream(Convert.FromBase64String(compressedString));
 
             using (var stream = new DeflateStream(compressedStream, CompressionMode.Decompress))

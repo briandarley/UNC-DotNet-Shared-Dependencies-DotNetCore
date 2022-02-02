@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UNC.Extensions.General;
-using UNC.Services.Interfaces;
 using UNC.Services.Interfaces.Response;
 using UNC.Services.Responses;
 
@@ -23,14 +20,7 @@ namespace UNC.API.Base.Infrastructure
     public static class Extensions
     {
 
-        public static T ToEntityFromResponse<T>(this IResponse value) where T : IEntity
-        {
-            if (value is IEntityResponse<T> entityResponse)
-            {
-                return entityResponse.Entity;
-            }
-            throw new ArgumentException("Value is not of type IEntityResponse");
-        }
+       
 
 
 

@@ -13,6 +13,8 @@ using Serilog.Events;
 using UNC.LogHandler.Extensions;
 using UNC.LogHandler.Models;
 using UNC.Services.Configurations;
+using UNC.Services.Interfaces;
+using UNC.Services.Interfaces.Response;
 using UNC.Services.Models;
 
 namespace UNC.Services.Infrastructure
@@ -256,6 +258,24 @@ namespace UNC.Services.Infrastructure
             }
 
             return Encoding.UTF8.GetString(decompressedBytes);
+        }
+
+        public static T ToEntityFromResponse<T>(this IResponse value) where T : IEntity
+        {
+            if (value is IEntityResponse<T> entityResponse)
+            {
+                return entityResponse.Entity;
+            }
+            throw new ArgumentException("Value is not of type IEntityResponse");
+        }
+
+        public static T ToTypeFromResponse<T>(this IResponse value) 
+        {
+            if (value is ITypedResponse<T> entityResponse)
+            {
+                return entityResponse.Entity;
+            }
+            throw new ArgumentException("Value is not of type ITypedResponse");
         }
     }
 }

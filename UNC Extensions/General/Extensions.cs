@@ -171,7 +171,7 @@ namespace UNC.Extensions.General
         public static bool IsSamAccountName(this string value)
         {
             if (value.IsNullOrEmpty()) return false;
-            return Regex.Match(value, @"^[^""\[\]:;\|=\+\*\?<>\/\\. ][^""\[\]:;\|=\+\*\?<>\/\\\n\r\t]{0,17}[^""\[\]:;\|=\+\*\?<>\/\\ \n\r\t]$").Success;
+            return Regex.Match(value, @"^[^""\[\]:;\|=\+\*\?<>\/\\. ][^""\[\]:;\|=\+\*\?<>\/\\\n\r\t]{0,40}[^""\[\]:;\|=\+\*\?<>\/\\ \n\r\t]$").Success;
         }
 
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> value)

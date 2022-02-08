@@ -120,7 +120,7 @@ namespace UNC.Services.Infrastructure
                 var appName = configuration.GetValue<string>("Application");
                 
                 var filePath = configuration.GetValue<string>("Serilog:LogFilePath");
-                filePath = System.IO.Path.Combine(filePath, appName);
+                filePath = Path.Combine(filePath, appName);
                 filePath = filePath + $@"\{appName}.log";
                 
                 var logEventLevel = configuration.GetValue<LogEventLevel>("Serilog:MinimumLevel");

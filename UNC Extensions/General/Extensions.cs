@@ -94,7 +94,7 @@ namespace UNC.Extensions.General
         }
 
 
-        
+
         public static bool IsValidProxyAddress(this string value)
         {
             try
@@ -107,7 +107,7 @@ namespace UNC.Extensions.General
                 }
 
                 return value.Substring(5).IsEmail();
-                
+
             }
             catch
             {
@@ -213,15 +213,32 @@ namespace UNC.Extensions.General
                 .GetType()
                 .GetField(value.ToString())
                 .GetCustomAttribute<DescriptionAttribute>();
-            
+
             if (description is null)
             {
                 return value.ToString();
             }
-            
+
             return description.Description;
         }
 
+        public static string ToEmailFromSmtpAddress(this string value)
+        {
+            if (value.IsEmail()) return value;
+
+            value = value.Trim();
+            if (value.IsEmptyOrNull()) return string.Empty;
+
+
+            if (!value.StartsWithIgnoreCase("smtp:")) return string.Empty;
+
+            value = value.Substring(5);
+
+            if (value.IsEmail()) return value;
+
+            return string.Empty;
+
+        }
 
         public static IEnumerable<FieldInfo> GetConstants(this Type type)
         {

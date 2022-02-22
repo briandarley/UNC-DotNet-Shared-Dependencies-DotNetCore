@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using Serilog;
 using Serilog.Events;
@@ -19,22 +21,44 @@ namespace UNC.Services
     public abstract class ServiceBase
     {
         private readonly ILogger _logger;
-        
+        private readonly IPrincipal _principal;
+
 
         private readonly RequestHeader _requestHeader;
-        protected ServiceBase(Serilog.ILogger logger)
+        protected ServiceBase(ILogger logger)
         {
             _logger = logger;
         }
-        protected ServiceBase(Serilog.ILogger logger, RequestHeader requestHeader = null)
+        protected ServiceBase(ILogger logger,IPrincipal principal = null, RequestHeader requestHeader = null)
         {
             _logger = logger;
+            _principal = principal;
             _requestHeader = requestHeader;
         }
 
         protected string AuthUser()
         {
+            if (_principal != null)
+            {
+                if (_principal?.Identity?.Name != null)
+                {
+                    return _principal.Identity.Name;
+                }
 
+                var claimsPrincipal = (ClaimsPrincipal)_principal;
+
+                if (claimsPrincipal?.Claims != null)
+                {
+                    var sub = claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals("sub"));
+
+                    if (sub?.Value != null)
+                    {
+                        return sub.Value;
+                    }
+                }
+            }
+
+            
             if (_requestHeader == null) return "Anonymous";
 
             return !string.IsNullOrEmpty(_requestHeader.AuthUser)

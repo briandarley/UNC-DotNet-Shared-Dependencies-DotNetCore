@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -19,12 +21,14 @@ namespace UNC.Services
     public class LogService : ILogService
     {
         private readonly ILogger _logger;
-        
+        private readonly IPrincipal _principal;
+
         private readonly RequestHeader _requestHeader;
         private static string _applicationName;
-        public LogService(ILogger logger, IConfiguration configuration,RequestHeader requestHeader = null)
+        public LogService(ILogger logger,  IConfiguration configuration, IPrincipal principal = null, RequestHeader requestHeader = null)
         {
             _logger = logger;
+            _principal = principal;
             _requestHeader = requestHeader;
 
             if (string.IsNullOrEmpty(_applicationName))
@@ -43,11 +47,24 @@ namespace UNC.Services
 
         protected string AuthUser()
         {
-            //if (_principal?.Identity.Name != null)
-            //{
-            //    return _principal?.Identity.Name;
-            //}
+            if (_principal?.Identity?.Name != null)
+            {
+                return _principal.Identity.Name;
+            }
 
+            var claimsPrincipal = (ClaimsPrincipal)_principal;
+
+            if (claimsPrincipal?.Claims != null)
+            {
+                var sub = claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals("sub"));
+
+                if (sub?.Value != null)
+                {
+                    return sub.Value;
+                }
+            }
+
+            
 
             if (_requestHeader == null) return null;
 

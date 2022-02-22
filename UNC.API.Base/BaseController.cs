@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using UNC.API.Base.Infrastructure;
 using UNC.API.Base.Models;
+using UNC.Extensions.General;
 using UNC.Services;
+using UNC.Services.Models;
 using RequestHeaderValues = UNC.API.Base.Constants.RequestHeaderConstants.CodeValueConstants;
 namespace UNC.API.Base
 {
@@ -71,17 +74,35 @@ namespace UNC.API.Base
 
         protected string AuthUser()
         {
-            if (_principal?.Identity.Name != null)
+            if(_principal != null)
             {
-                return _principal?.Identity.Name;
+                if (_principal?.Identity?.Name != null)
+                {
+                    return _principal.Identity.Name;
+                }
+
+                var claimsPrincipal = (ClaimsPrincipal)_principal;
+
+                if (claimsPrincipal?.Claims != null)
+                {
+                    var sub = claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals("sub"));
+
+                    if (sub?.Value != null)
+                    {
+                        return sub.Value;
+                    }
+                }
             }
+
+
             var requestHeaders = GetRequestHeaders();
 
             if (requestHeaders == null) return "Anonymous";
 
-            return !string.IsNullOrEmpty(requestHeaders.AuthUser)
+            return requestHeaders.AuthUser.IsEmpty()
                 ? requestHeaders.AuthUser
                 : null;
+            
         }
 
 

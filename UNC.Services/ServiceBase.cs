@@ -41,7 +41,10 @@ namespace UNC.Services
         {
             return _principal?.Identity?.IsAuthenticated ?? false;
         }
-
+        protected bool IsInRoles(IEnumerable<string> roles)
+        {
+            return roles.Any(IsInRole);
+        }
         protected bool IsInRole(string role)
         {
             return _principal.IsInRole(role);

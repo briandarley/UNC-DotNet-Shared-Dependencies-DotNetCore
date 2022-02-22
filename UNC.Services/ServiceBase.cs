@@ -42,6 +42,20 @@ namespace UNC.Services
             return _principal?.Identity?.IsAuthenticated ?? false;
         }
 
+        protected string GetClaimValue(string type)
+        {
+            if (!IsAuthenticated()) return string.Empty;
+
+            var claimsPrincipal = ((ClaimsPrincipal)_principal);
+
+            if (claimsPrincipal?.Claims is null || !claimsPrincipal.Claims.Any()) return string.Empty;
+
+            if (claimsPrincipal.Claims.All(c => !c.Type.EqualsIgnoreCase(type))) return string.Empty;
+
+            return claimsPrincipal.Claims.Single(c => c.Type.EqualsIgnoreCase(type)).Value;
+            
+
+        }
 
         protected string AuthUser()
         {

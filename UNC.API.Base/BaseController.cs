@@ -71,6 +71,10 @@ namespace UNC.API.Base
 
             return !string.IsNullOrEmpty(requestHeaders.ApplicationName) ? requestHeaders.ApplicationName : null;
         }
+        protected bool IsAuthenticated()
+        {
+            return _principal?.Identity?.IsAuthenticated ?? false;
+        }
 
         protected string AuthUser()
         {

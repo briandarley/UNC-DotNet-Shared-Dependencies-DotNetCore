@@ -25,7 +25,7 @@ namespace UNC.Services
 
         private readonly RequestHeader _requestHeader;
         private static string _applicationName;
-        public LogService(ILogger logger,  IConfiguration configuration, IPrincipal principal = null, RequestHeader requestHeader = null)
+        public LogService(ILogger logger, IConfiguration configuration, IPrincipal principal = null, RequestHeader requestHeader = null)
         {
             _logger = logger;
             _principal = principal;
@@ -35,7 +35,7 @@ namespace UNC.Services
             {
                 _applicationName = configuration.GetSection("Application").Value;
             }
-            
+
         }
 
         protected string AppName()
@@ -45,6 +45,10 @@ namespace UNC.Services
             return !string.IsNullOrEmpty(_requestHeader.ApplicationName) ? _requestHeader.ApplicationName : _applicationName;
         }
 
+        protected bool IsAuthenticated()
+        {
+            return _principal?.Identity?.IsAuthenticated ?? false;
+        }
         protected string AuthUser()
         {
             if (_principal?.Identity?.Name != null)
@@ -64,7 +68,7 @@ namespace UNC.Services
                 }
             }
 
-            
+
 
             if (_requestHeader == null) return null;
 
@@ -88,7 +92,7 @@ namespace UNC.Services
                 Method = callerName,
                 FilePath = sourcePath,
                 LineNumber = ln,
-                PathUri =  pathUri
+                PathUri = pathUri
 
             };
             return message;

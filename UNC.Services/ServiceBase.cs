@@ -42,6 +42,10 @@ namespace UNC.Services
             return _principal?.Identity?.IsAuthenticated ?? false;
         }
 
+        protected bool IsInRole(string role)
+        {
+            return _principal.IsInRole(role);
+        }
         protected string GetClaimValue(string type)
         {
             if (!IsAuthenticated()) return string.Empty;

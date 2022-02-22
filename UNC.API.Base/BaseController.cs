@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Claims;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -71,6 +72,13 @@ namespace UNC.API.Base
 
             return !string.IsNullOrEmpty(requestHeaders.ApplicationName) ? requestHeaders.ApplicationName : null;
         }
+
+        protected bool IsInRole(string role)
+        {
+            if (!IsAuthenticated()) return false;
+            return _principal.IsInRole(role);
+        }
+
         protected bool IsAuthenticated()
         {
             return _principal?.Identity?.IsAuthenticated ?? false;

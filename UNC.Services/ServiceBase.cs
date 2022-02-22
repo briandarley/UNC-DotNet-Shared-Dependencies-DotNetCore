@@ -43,10 +43,12 @@ namespace UNC.Services
         }
         protected bool IsInRoles(IEnumerable<string> roles)
         {
+            if (!IsAuthenticated()) return false;
             return roles.Any(IsInRole);
         }
         protected bool IsInRole(string role)
         {
+            if (!IsAuthenticated()) return false;
             return _principal.IsInRole(role);
         }
         protected string GetClaimValue(string type)

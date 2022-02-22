@@ -45,26 +45,26 @@ namespace UNC.Services
             return !string.IsNullOrEmpty(_requestHeader.ApplicationName) ? _requestHeader.ApplicationName : _applicationName;
         }
 
-        protected bool IsAuthenticated()
-        {
-            return _principal?.Identity?.IsAuthenticated ?? false;
-        }
+        
         protected string AuthUser()
         {
-            if (_principal?.Identity?.Name != null)
+            if (_principal != null)
             {
-                return _principal.Identity.Name;
-            }
-
-            var claimsPrincipal = (ClaimsPrincipal)_principal;
-
-            if (claimsPrincipal?.Claims != null)
-            {
-                var sub = claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals("sub"));
-
-                if (sub?.Value != null)
+                if (_principal?.Identity?.Name != null)
                 {
-                    return sub.Value;
+                    return _principal.Identity.Name;
+                }
+
+                var claimsPrincipal = (ClaimsPrincipal)_principal;
+
+                if (claimsPrincipal?.Claims != null)
+                {
+                    var sub = claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals("sub"));
+
+                    if (sub?.Value != null)
+                    {
+                        return sub.Value;
+                    }
                 }
             }
 

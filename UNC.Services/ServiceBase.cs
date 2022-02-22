@@ -36,6 +36,13 @@ namespace UNC.Services
             _requestHeader = requestHeader;
         }
 
+
+        protected bool IsAuthenticated()
+        {
+            return _principal?.Identity?.IsAuthenticated ?? false;
+        }
+
+
         protected string AuthUser()
         {
             if (_principal != null)

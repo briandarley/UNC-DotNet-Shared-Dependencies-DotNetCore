@@ -65,7 +65,7 @@ namespace UNC.HttpClient
             string applicationName = "",
             IAuthSettings authSettings = null,
             IPrincipal principal = null, 
-            RequestHeader requestHeader = null) : base(logger, requestHeader)
+            RequestHeader requestHeader = null) : base(logger, principal,requestHeader)
         {
             
             _clientId = clientId;

@@ -54,13 +54,13 @@ namespace UNC.API.Base.Infrastructure
             if (value is IEntityResponse)
             {
 
-                var entity = JObject.Parse(raw).GetValue("Entity");
+                var entity = JObject.Parse(raw).GetValue("Entity", StringComparison.CurrentCultureIgnoreCase);
                 return new JsonResult(entity);
             }
 
             if (value is ICollectionResponse)
             {
-                var entities = JObject.Parse(raw).GetValue("Entities");
+                var entities = JObject.Parse(raw).GetValue("Entities",StringComparison.CurrentCultureIgnoreCase);
 
                 return new JsonResult(entities);
             }

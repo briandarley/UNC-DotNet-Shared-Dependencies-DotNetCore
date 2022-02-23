@@ -82,8 +82,8 @@
       "UNC.Extensions": {
         "type": "Direct",
         "requested": "[*, )",
-        "resolved": "2021.10.11.1",
-        "contentHash": "KFWMAFEKsZtp2TYA8HyiiI44kv2qTXWHQa9BLXFyp89VG7tipoXmt2pK/gkY0d1AmKy0/6oku0HDNnnCM6/xgQ==",
+        "resolved": "2022.2.23.1",
+        "contentHash": "i8Dge+p0/O34nUAqTvGsZgTrBb+wYBmZaKCo356zESQYR2WajoDCodwDVkXqmMLlH7DqM4VC8O3GReBL4sLLLQ==",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.10",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.10",
@@ -93,8 +93,8 @@
       "UNC.Services": {
         "type": "Direct",
         "requested": "[*, )",
-        "resolved": "2021.10.11.5",
-        "contentHash": "ylnjITPbghpBOjJIsQ6+MFYFA3s9ecogDPyMsYJwVnSDzYnT/kWrmwGDCj/9+nNUDmX+uFrSe/gx6jCbc+QcCw==",
+        "resolved": "2022.2.23.1",
+        "contentHash": "cJeEWYiwGKWIkhe6dFTuMHov/DF0M0uUOyN5UFkvz6d+MjnGWbrJNXR3iohQPe3la4Hxpf0PJZXeadQWZfxL1A==",
         "dependencies": {
           "AutoMapper": "10.1.1",
           "UNC.Extensions": "2021.10.11.1",

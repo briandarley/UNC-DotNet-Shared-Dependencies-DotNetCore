@@ -24,5 +24,8 @@
     <PackageReference Include="UNC.Services" Version="*" />
     
   </ItemGroup>
+  <!--<ItemGroup>
+    <ProjectReference Include="..\UNC Extensions\UNC.Extensions.csproj" />
+  </ItemGroup>-->
 
 </Project>

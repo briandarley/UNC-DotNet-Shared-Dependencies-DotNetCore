@@ -823,7 +823,13 @@ namespace UNC.HttpClient
                 var client = LazyClient.Value();
 
                 LogWebRequestPath(fullPath);
+
                 response = await client.GetAsync(fullPath);
+
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+
+                }
 
                 if (response.StatusCode == HttpStatusCode.NotFound
                     && typeof(T).IsGenericType
@@ -846,7 +852,9 @@ namespace UNC.HttpClient
                     {
                         return (T)(object) rawResponse;
                     }
-                    return JsonConvert.DeserializeObject<T>(rawResponse);
+
+                    var result = JsonConvert.DeserializeObject<T>(rawResponse);
+                    return result;
 
                 }
 

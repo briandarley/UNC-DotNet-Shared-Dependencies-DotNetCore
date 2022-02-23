@@ -122,8 +122,9 @@ namespace UNC.Extensions.General
             {
                 Formatting = Formatting.Indented,
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects
-            });
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+        });
         }
 
         private class InterfaceContractResolver : DefaultContractResolver

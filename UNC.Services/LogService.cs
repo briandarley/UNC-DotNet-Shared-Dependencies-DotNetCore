@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Serilog;
+using UNC.Extensions.General;
 using UNC.LogHandler.Models;
 using UNC.Services.Interfaces.Response;
 using UNC.Services.Models;
@@ -59,11 +60,14 @@ namespace UNC.Services
 
                 if (claimsPrincipal?.Claims != null)
                 {
-                    var sub = claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals("sub"));
+                    var name = claimsPrincipal
+                        .Claims
+                        .Where(c => c.Type == ClaimTypes.NameIdentifier || c.Type == ClaimTypes.Name || c.Type.EqualsIgnoreCase("sub"))
+                        .FirstOrDefault(c => c.Value.HasValue());
 
-                    if (sub?.Value != null)
+                    if (name?.Value != null)
                     {
-                        return sub.Value;
+                        return name.Value;
                     }
                 }
             }

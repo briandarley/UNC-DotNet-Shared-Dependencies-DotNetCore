@@ -86,14 +86,17 @@ namespace UNC.API.Base
 
         protected string AuthUser()
         {
-            if(_principal != null)
+            var principal = _principal ?? User;
+
+            
+            if(principal != null)
             {
-                if (_principal?.Identity?.Name != null)
+                if (principal?.Identity?.Name != null)
                 {
-                    return _principal.Identity.Name;
+                    return principal.Identity.Name;
                 }
 
-                var claimsPrincipal = (ClaimsPrincipal)_principal;
+                var claimsPrincipal = (ClaimsPrincipal)principal;
 
                 if (claimsPrincipal?.Claims != null)
                 {

@@ -76,12 +76,13 @@ namespace UNC.API.Base
         protected bool IsInRole(string role)
         {
             if (!IsAuthenticated()) return false;
-            return _principal.IsInRole(role);
+
+            return (_principal??User).IsInRole(role);
         }
 
         protected bool IsAuthenticated()
         {
-            return _principal?.Identity?.IsAuthenticated ?? false;
+            return (_principal ?? User)?.Identity?.IsAuthenticated ?? false;
         }
 
         protected string AuthUser()

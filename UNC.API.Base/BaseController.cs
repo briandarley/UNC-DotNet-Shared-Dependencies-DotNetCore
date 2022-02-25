@@ -97,8 +97,11 @@ namespace UNC.API.Base
 
                 if (claimsPrincipal?.Claims != null)
                 {
-                    var name = claimsPrincipal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
-                    //var sub = claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals("sub"));
+                    var name = claimsPrincipal
+                        .Claims
+                        .Where(c => c.Type == ClaimTypes.NameIdentifier || c.Type == ClaimTypes.Name || c.Type.EqualsIgnoreCase("sub"))
+                        .FirstOrDefault(c=> c.Value.HasValue());
+                    
 
                     if (name?.Value != null)
                     {

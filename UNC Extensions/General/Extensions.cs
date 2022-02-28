@@ -173,6 +173,7 @@ namespace UNC.Extensions.General
         public static bool IsSamAccountName(this string value)
         {
             if (value.IsNullOrEmpty()) return false;
+            if (value.IsEmail()) return false;
             return Regex.Match(value, @"^[^""\[\]:;\|=\+\*\?<>\/\\. ][^""\[\]:;\|=\+\*\?<>\/\\\n\r\t]{0,40}[^""\[\]:;\|=\+\*\?<>\/\\ \n\r\t]$").Success;
         }
 

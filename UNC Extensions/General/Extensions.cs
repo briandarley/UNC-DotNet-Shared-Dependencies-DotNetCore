@@ -45,6 +45,12 @@ namespace UNC.Extensions.General
 
             return value.Contains(to, StringComparison.CurrentCultureIgnoreCase);
         }
+        public static bool ContainsIgnoreCase(this List<string> value, string to)
+        {
+            if (value is null) return false;
+            return value.Any(c => c.ContainsIgnoreCase(to));
+            
+        }
         public static bool EqualsIgnoreCase(this string value, string to)
         {
             if (value == to) return true;

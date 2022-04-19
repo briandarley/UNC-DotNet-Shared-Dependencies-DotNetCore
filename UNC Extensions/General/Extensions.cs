@@ -72,7 +72,7 @@ namespace UNC.Extensions.General
             return value.StartsWith(to, StringComparison.CurrentCultureIgnoreCase);
 
         }
-
+        
         public static bool IsEmptyOrNull<T>(this IEnumerable<T> value)
         {
             if (value is null) return true;
@@ -135,6 +135,12 @@ namespace UNC.Extensions.General
 
         public static string EmailDomain(this string value)
         {
+            if (value.IsEmpty()) return string.Empty; 
+
+            if (value.StartsWithIgnoreCase("smtp:"))
+            {
+                value = value.ToEmailFromSmtpAddress();
+            }
             if (!value.IsEmail()) return string.Empty;
             var index = value.IndexOf("@", StringComparison.Ordinal);
             if (index <= 0) return string.Empty;

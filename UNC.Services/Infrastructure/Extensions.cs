@@ -59,7 +59,7 @@ namespace UNC.Services.Infrastructure
                     }
 
 
-                    var principal = cfg.GetService<IPrincipal>();
+                    var principal = cfg.GetRequiredService<IPrincipal>();
                     if (principal != null && principal.Identity.IsAuthenticated)
                     {
                         client.DefaultRequestHeaders.Add(Constants.RequestHeaders.AUTH_USER, principal.Identity.Name);

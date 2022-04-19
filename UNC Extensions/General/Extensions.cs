@@ -133,6 +133,14 @@ namespace UNC.Extensions.General
             }
         }
 
+        public static string EmailDomain(this string value)
+        {
+            if (!value.IsEmail()) return string.Empty;
+            var index = value.IndexOf("@", StringComparison.Ordinal);
+            if (index <= 0) return string.Empty;
+            return value[(index + 1)..];
+        }
+
         /// <summary>
         /// Cleans the phone number
         /// Expected formats +1 (919) 555-1212

@@ -15,7 +15,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="UNC.Services" Version="*" />
+    <PackageReference Include="UNC.Services" Version="2022.4.24.3" />
   </ItemGroup>
   <!--<ItemGroup>
     <ProjectReference Include="..\UNC.Services\UNC.Services.csproj" />

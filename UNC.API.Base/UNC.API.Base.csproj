@@ -21,8 +21,11 @@
   <ItemGroup>
 
     <PackageReference Include="UNC.Extensions" Version="*" />
-    <PackageReference Include="UNC.Services" Version="*" />
+    <!--<PackageReference Include="UNC.Services" Version="*" />-->
     
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UNC.Services\UNC.Services.csproj" />
   </ItemGroup>
   <!--<ItemGroup>
     <ProjectReference Include="..\UNC Extensions\UNC.Extensions.csproj" />

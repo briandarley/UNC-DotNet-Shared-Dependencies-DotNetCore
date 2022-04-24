@@ -82,23 +82,12 @@
       "UNC.Extensions": {
         "type": "Direct",
         "requested": "[*, )",
-        "resolved": "2022.2.23.1",
-        "contentHash": "i8Dge+p0/O34nUAqTvGsZgTrBb+wYBmZaKCo356zESQYR2WajoDCodwDVkXqmMLlH7DqM4VC8O3GReBL4sLLLQ==",
+        "resolved": "2022.4.19.3",
+        "contentHash": "3l5ZQF5il9aV4OfxXaB3DP6M2hV7/phjzHx9I8pUrSqp/4cGw+WJe27MtWJ08oFpbPG6ptxc9I7JEC5h0g0A8Q==",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.10",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.10",
           "Newtonsoft.Json": "13.0.1"
-        }
-      },
-      "UNC.Services": {
-        "type": "Direct",
-        "requested": "[*, )",
-        "resolved": "2022.2.23.1",
-        "contentHash": "cJeEWYiwGKWIkhe6dFTuMHov/DF0M0uUOyN5UFkvz6d+MjnGWbrJNXR3iohQPe3la4Hxpf0PJZXeadQWZfxL1A==",
-        "dependencies": {
-          "AutoMapper": "10.1.1",
-          "UNC.Extensions": "2021.10.11.1",
-          "UNC.LogHandler": "2021.10.11.1"
         }
       },
       "Unchase.Swashbuckle.AspNetCore.Extensions": {
@@ -1394,11 +1383,19 @@
       },
       "UNC.LogHandler": {
         "type": "Transitive",
-        "resolved": "2021.10.11.1",
-        "contentHash": "YQpuFEnVmFXGsLuunkOBkO68KqDiuHPBdN4m/PGe5abPmCG9jZB+hGwA5yW+BLQUOClrmawMFGiccZkvtB6DAA==",
+        "resolved": "2021.10.11.2",
+        "contentHash": "bB43j+i5yTxPmiEKqrJEjb8+x5U60LDUbw7WBOuRAAznOIZHaXqPjtt03ZvvFh76h8KMkCAyse/j4D5XLHlxsQ==",
         "dependencies": {
           "Serilog.AspNetCore": "4.1.0",
           "Serilog.Enrichers.Thread": "3.1.0"
+        }
+      },
+      "unc.services": {
+        "type": "Project",
+        "dependencies": {
+          "AutoMapper": "10.1.1",
+          "UNC.Extensions": "0.0.0",
+          "UNC.LogHandler": "0.0.0"
         }
       }
     }

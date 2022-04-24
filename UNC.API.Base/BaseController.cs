@@ -120,8 +120,8 @@ namespace UNC.API.Base
             if (requestHeaders == null) return "Anonymous";
 
             return requestHeaders.AuthUser.IsEmpty()
-                ? requestHeaders.AuthUser
-                : null;
+                ? null
+                : requestHeaders.AuthUser;
             
         }
 

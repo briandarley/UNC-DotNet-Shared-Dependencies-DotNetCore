@@ -10,7 +10,7 @@
   <ItemGroup>
 
     <PackageReference Include="UNC.Extensions" Version="*" />
-    <PackageReference Include="UNC.Services" Version="*" />
+    <PackageReference Include="UNC.Services" Version="2022.4.24.3" />
 
   </ItemGroup>
 

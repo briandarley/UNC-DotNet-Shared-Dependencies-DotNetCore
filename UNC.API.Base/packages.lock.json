@@ -90,6 +90,17 @@
           "Newtonsoft.Json": "13.0.1"
         }
       },
+      "UNC.Services": {
+        "type": "Direct",
+        "requested": "[*, )",
+        "resolved": "2022.4.24.3",
+        "contentHash": "kD9SmIAf0sO9be5Q6Dh1bR7Vj+YP+5a7JaVCO6krQ475hq5/Pc0/FESKfPZdYfyz3EvYWUVf5JtomSTsFM53Rg==",
+        "dependencies": {
+          "AutoMapper": "11.0.1",
+          "UNC.Extensions": "2022.4.19.3",
+          "UNC.LogHandler": "2022.4.24.1"
+        }
+      },
       "Unchase.Swashbuckle.AspNetCore.Extensions": {
         "type": "Direct",
         "requested": "[2.6.0, )",
@@ -1273,14 +1284,6 @@
           "Newtonsoft.Json": "13.0.1",
           "Serilog.AspNetCore": "5.0.0",
           "Serilog.Enrichers.Thread": "3.1.0"
-        }
-      },
-      "unc.services": {
-        "type": "Project",
-        "dependencies": {
-          "AutoMapper": "11.0.1",
-          "UNC.Extensions": "0.0.0",
-          "UNC.LogHandler": "2022.4.24.1"
         }
       }
     }

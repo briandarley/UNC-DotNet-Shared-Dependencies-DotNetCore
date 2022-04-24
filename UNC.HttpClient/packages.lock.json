@@ -10,9 +10,9 @@
       },
       "UNC.Services": {
         "type": "Direct",
-        "requested": "[2022.2.23.2, )",
-        "resolved": "2022.2.23.2",
-        "contentHash": "LKr5bc9bPmgt20QfZjddwYDwRMbvF9ii2umGEoSVUSTu/+bZnEisz8R9Dq0XkWtnoYRGusfnhEXNnPR22jn7NA==",
+        "requested": "[*, )",
+        "resolved": "2022.4.19.4",
+        "contentHash": "SANJTOSaygeVOOOyjhAusI7rxajfaYDzKLsHYnLgCw6clZvsAq9sPtGyCK5JTrbjVZOoNw6SRJPhLTr2wdQN4A==",
         "dependencies": {
           "AutoMapper": "10.1.1",
           "UNC.Extensions": "2021.10.11.1",

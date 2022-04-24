@@ -4,19 +4,18 @@
     ".NETCoreApp,Version=v3.1": {
       "AutoMapper": {
         "type": "Direct",
-        "requested": "[10.1.1, )",
-        "resolved": "10.1.1",
-        "contentHash": "uMgbqOdu9ZG5cIOty0C85hzzayBH2i9BthnS5FlMqKtMSHDv4ts81a2jS1VFaDBVhlBeIqJ/kQKjQY95BZde9w==",
+        "requested": "[11.0.1, )",
+        "resolved": "11.0.1",
+        "contentHash": "WIadGC1pIwbnyTubvI577p3F++Bsj9q2Q3OaAc1I0QS+JhupN1xkdrPBhI9bPIeg63zM81tZplUNYkqU1HE5jQ==",
         "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Reflection.Emit": "4.7.0"
+          "Microsoft.CSharp": "4.7.0"
         }
       },
       "UNC.Extensions": {
         "type": "Direct",
         "requested": "[*, )",
-        "resolved": "2021.10.11.1",
-        "contentHash": "KFWMAFEKsZtp2TYA8HyiiI44kv2qTXWHQa9BLXFyp89VG7tipoXmt2pK/gkY0d1AmKy0/6oku0HDNnnCM6/xgQ==",
+        "resolved": "2022.4.19.3",
+        "contentHash": "3l5ZQF5il9aV4OfxXaB3DP6M2hV7/phjzHx9I8pUrSqp/4cGw+WJe27MtWJ08oFpbPG6ptxc9I7JEC5h0g0A8Q==",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.10",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.10",
@@ -26,8 +25,8 @@
       "UNC.LogHandler": {
         "type": "Direct",
         "requested": "[*, )",
-        "resolved": "2021.10.11.1",
-        "contentHash": "YQpuFEnVmFXGsLuunkOBkO68KqDiuHPBdN4m/PGe5abPmCG9jZB+hGwA5yW+BLQUOClrmawMFGiccZkvtB6DAA==",
+        "resolved": "2021.10.11.2",
+        "contentHash": "bB43j+i5yTxPmiEKqrJEjb8+x5U60LDUbw7WBOuRAAznOIZHaXqPjtt03ZvvFh76h8KMkCAyse/j4D5XLHlxsQ==",
         "dependencies": {
           "Serilog.AspNetCore": "4.1.0",
           "Serilog.Enrichers.Thread": "3.1.0"
@@ -523,8 +522,15 @@
       },
       "System.Reflection.Emit": {
         "type": "Transitive",
-        "resolved": "4.7.0",
-        "contentHash": "VR4kk8XLKebQ4MZuKuIni/7oh+QGFmZW3qORd1GvBq/8026OpW501SzT/oypwiQl4TvT8ErnReh/NzY9u+C6wQ=="
+        "resolved": "4.0.1",
+        "contentHash": "P2wqAj72fFjpP6wb9nSfDqNBMab+2ovzSDzUZK7MVIm54tBJEPr9jWfSjjoTpPwj1LeKcmX3vr0ttyjSSFM47g==",
+        "dependencies": {
+          "System.IO": "4.1.0",
+          "System.Reflection": "4.1.0",
+          "System.Reflection.Emit.ILGeneration": "4.0.1",
+          "System.Reflection.Primitives": "4.0.1",
+          "System.Runtime": "4.1.0"
+        }
       },
       "System.Reflection.Emit.ILGeneration": {
         "type": "Transitive",

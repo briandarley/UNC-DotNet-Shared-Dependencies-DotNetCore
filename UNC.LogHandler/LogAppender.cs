@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog.Core;
+
 using Serilog.Events;
 using UNC.LogHandler.Models;
 

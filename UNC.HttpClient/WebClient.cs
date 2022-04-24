@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Serilog;
+using UNC.Extensions.General;
 using UNC.HttpClient.EventHandlers;
 using UNC.HttpClient.Exceptions;
 using UNC.HttpClient.Extensions;
@@ -20,7 +23,7 @@ using UNC.Services.Responses;
 
 namespace UNC.HttpClient
 {
-    public class WebClient : ServiceBase, IWebClient,IDisposable
+    public class WebClient : ServiceBase, IWebClient, IDisposable
     {
         public TokenResponse AuthResponse { get; set; }
         private readonly string _clientId;
@@ -51,7 +54,7 @@ namespace UNC.HttpClient
                 {
                     throw new ArgumentException("Invalid URL, unable to resolve path");
                 }
-                
+
                 _baseAddress = value;
             }
 
@@ -60,14 +63,14 @@ namespace UNC.HttpClient
         public bool DefaultEnsureSuccessStatusCode { get; set; }
 
         public WebClient(
-            ILogger logger, 
-            string clientId = "", 
+            ILogger logger,
+            string clientId = "",
             string applicationName = "",
             IAuthSettings authSettings = null,
-            IPrincipal principal = null, 
-            RequestHeader requestHeader = null) : base(logger, principal,requestHeader)
+            IPrincipal principal = null,
+            RequestHeader requestHeader = null) : base(logger, principal, requestHeader)
         {
-            
+
             _clientId = clientId;
             _applicationName = applicationName;
             _authSettings = authSettings;
@@ -76,7 +79,7 @@ namespace UNC.HttpClient
             InitializeEndPoint();
         }
 
-        
+
 
         private void InitializeEndPoint()
         {
@@ -89,8 +92,8 @@ namespace UNC.HttpClient
 
 
 
-           
-            
+
+
 
 
             //Not trying to get cute, we can't pass the base address in most cases so we use the lazy instantiation to get it when we perform an actual request. 
@@ -119,9 +122,21 @@ namespace UNC.HttpClient
                     {
                         client.DefaultRequestHeaders.Add(RequestHeaders.APPLICATION_NAME, _applicationName);
                     }
-                    if (_principal != null && _principal.Identity.IsAuthenticated)
+                    if (_principal is { Identity: { IsAuthenticated: true } })
                     {
-                        client.DefaultRequestHeaders.Add(RequestHeaders.AUTH_USER, _principal.Identity.Name);
+                        
+                        var claimsIdentity = (ClaimsIdentity)_principal.Identity;
+                        var userName = claimsIdentity.Name;
+                        if (claimsIdentity.Name.IsEmpty())
+                        {
+                            var claim = claimsIdentity.Claims.FirstOrDefault(c => c.Type.EqualsIgnoreCase("name"));
+                            if (claim != null)
+                            {
+                                userName = claim.Value;
+                            }
+                            
+                        }
+                        client.DefaultRequestHeaders.Add(RequestHeaders.AUTH_USER, userName);
                     }
 
                     if (_authSettings != null)
@@ -220,10 +235,10 @@ namespace UNC.HttpClient
             try
             {
                 LogBeginRequest();
-                
+
                 var content = SerializedObject(entity);
 
-                
+
 
                 if (LazyClient is null)
                 {
@@ -362,7 +377,7 @@ namespace UNC.HttpClient
 
 
         }
-        
+
         public async Task<T> Put<T>(string path = "", object entity = null, bool putByQueryParameter = false)
         {
             var fullPath = BaseAddress + path;
@@ -371,7 +386,7 @@ namespace UNC.HttpClient
             {
 
                 LogBeginRequest();
-                
+
 
                 if (LazyClient is null)
                 {
@@ -519,9 +534,9 @@ namespace UNC.HttpClient
             {
                 LogBeginRequest();
 
-                
+
                 var content = SerializedObject(entity);
-                
+
                 if (LazyClient is null)
                 {
                     throw new Exception("LazyClient not initialized");
@@ -670,7 +685,7 @@ namespace UNC.HttpClient
             try
             {
                 LogBeginRequest();
-                
+
 
                 if (LazyClient is null)
                 {
@@ -850,7 +865,7 @@ namespace UNC.HttpClient
 
                     if (typeof(T).IsPrimitive || typeof(T) == typeof(string))
                     {
-                        return (T)(object) rawResponse;
+                        return (T)(object)rawResponse;
                     }
 
                     var result = JsonConvert.DeserializeObject<T>(rawResponse);
@@ -992,7 +1007,7 @@ namespace UNC.HttpClient
             {
                 LogBeginRequest();
 
-                
+
                 if (LazyClient is null)
                 {
                     throw new Exception("LazyClient not initialized");
@@ -1136,12 +1151,12 @@ namespace UNC.HttpClient
         public async Task<bool> EnsureSuccessStatusCode(string path = "")
         {
             var fullPath = BaseAddress + path;
-            
+
             try
             {
                 LogBeginRequest();
 
-                
+
                 if (LazyClient is null)
                 {
                     throw new Exception("LazyClient not initialized");
@@ -1187,7 +1202,7 @@ namespace UNC.HttpClient
             {
                 LogBeginRequest();
 
-                
+
 
                 fullPath = BaseAddress + path;
 
@@ -1359,10 +1374,10 @@ namespace UNC.HttpClient
             {
                 LogBeginRequest();
 
-                
+
                 var content = SerializedObject(entity);
 
-                
+
 
                 if (LazyClient is null)
                 {
@@ -1516,8 +1531,8 @@ namespace UNC.HttpClient
             try
             {
                 LogBeginRequest();
-                
-                
+
+
                 if (LazyClient is null)
                 {
                     throw new Exception("LazyClient not initialized");
@@ -1666,9 +1681,9 @@ namespace UNC.HttpClient
 
         public void Dispose()
         {
-            
+
         }
     }
 
-    
+
 }

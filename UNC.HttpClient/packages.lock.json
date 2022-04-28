@@ -2,17 +2,11 @@
   "version": 1,
   "dependencies": {
     ".NETCoreApp,Version=v3.1": {
-      "Newtonsoft.Json": {
-        "type": "Direct",
-        "requested": "[13.0.1, )",
-        "resolved": "13.0.1",
-        "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
-      },
       "UNC.Services": {
         "type": "Direct",
-        "requested": "[2022.4.24.3, )",
-        "resolved": "2022.4.24.3",
-        "contentHash": "kD9SmIAf0sO9be5Q6Dh1bR7Vj+YP+5a7JaVCO6krQ475hq5/Pc0/FESKfPZdYfyz3EvYWUVf5JtomSTsFM53Rg==",
+        "requested": "[*, )",
+        "resolved": "2022.4.28.1",
+        "contentHash": "EfRxTBaf/SkEXTLZMOzc6pfUdY1NPrbSUB7EEquiCB1nHh9VWP0cxywMLpGh5vzNpQFBQiS1RB05ZkgvshIvuA==",
         "dependencies": {
           "AutoMapper": "11.0.1",
           "UNC.Extensions": "2022.4.19.3",
@@ -191,6 +185,11 @@
         "type": "Transitive",
         "resolved": "5.0.0",
         "contentHash": "cI/VWn9G1fghXrNDagX9nYaaB/nokkZn0HYAawGaELQrl8InSezfe9OnfPZLcJq3esXxygh3hkq2c3qoV3SDyQ=="
+      },
+      "Newtonsoft.Json": {
+        "type": "Transitive",
+        "resolved": "13.0.1",
+        "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
       },
       "Serilog": {
         "type": "Transitive",

@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -299,6 +301,26 @@ namespace UNC.Extensions.General
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
 
+        public static string UserName(this IPrincipal principal)
+        {
+            if (principal?.Identity?.Name != null)
+            {
+                return principal.Identity.Name;
+            }
 
+            var claimsPrincipal = (ClaimsPrincipal)principal;
+
+            if (claimsPrincipal != null && claimsPrincipal.Claims != null)
+            {
+                var sub = claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals("sub"));
+
+                if (sub != null && sub.Value != null)
+                {
+                    return sub.Value;
+                }
+            }
+
+            return string.Empty;
+        }
     }
 }

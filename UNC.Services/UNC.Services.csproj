@@ -10,8 +10,8 @@
   </ItemGroup>
 
   
-  <PropertyGroup>
+  <!--<PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-  </PropertyGroup>
+  </PropertyGroup>-->
   
 </Project>

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Serilog;
 using UNC.Extensions.General;
 using UNC.LogHandler.Models;
@@ -49,30 +47,12 @@ namespace UNC.Services
         
         protected string AuthUser()
         {
-            if (_principal != null)
+            var userName = _principal.UserName();
+            if (userName.HasValue())
             {
-                if (_principal?.Identity?.Name != null)
-                {
-                    return _principal.Identity.Name;
-                }
-
-                var claimsPrincipal = (ClaimsPrincipal)_principal;
-
-                if (claimsPrincipal?.Claims != null)
-                {
-                    var name = claimsPrincipal
-                        .Claims
-                        .Where(c => c.Type == ClaimTypes.NameIdentifier || c.Type == ClaimTypes.Name || c.Type.EqualsIgnoreCase("sub"))
-                        .FirstOrDefault(c => c.Value.HasValue());
-
-                    if (name?.Value != null)
-                    {
-                        return name.Value;
-                    }
-                }
+                return userName;
             }
-
-
+            
 
             if (_requestHeader == null) return null;
 

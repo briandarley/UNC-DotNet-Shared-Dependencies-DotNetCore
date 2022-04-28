@@ -116,13 +116,13 @@ namespace UNC.Services.Infrastructure
             services.AddSingleton(cfg =>
             {
                 //AuthUser => Principal?.Identity?.Name
-                
+
                 var appName = configuration.GetValue<string>("Application");
-                
+
                 var filePath = configuration.GetValue<string>("Serilog:LogFilePath");
                 filePath = Path.Combine(filePath, appName);
                 filePath = filePath + $@"\{appName}.log";
-                
+
                 var logEventLevel = configuration.GetValue<LogEventLevel>("Serilog:MinimumLevel");
                 var outputTemplate = "===> {Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}";
 
@@ -133,7 +133,7 @@ namespace UNC.Services.Infrastructure
                 //}
                 IHttpContextAccessor GetHttpContextAccessor()
                 {
-                    
+
                     var httpContext = cfg.GetService<IHttpContextAccessor>();
                     return httpContext;
                 }
@@ -153,7 +153,7 @@ namespace UNC.Services.Infrastructure
                 var loggerConfiguration = new LoggerConfiguration()
                     .ReadFrom.Configuration(configuration)
                     .Enrich.WithThreadId()
-                    
+
                     .Enrich.WithProperty("Application", appName)
                     //.Enrich.WithProperty("AuthUser", principal.Identity.Name)
                     .Enrich.WithProperty("AppSource", appSource)
@@ -163,7 +163,10 @@ namespace UNC.Services.Infrastructure
 
                 if (logType.HasFlag(LogTypes.RemoteApiLogging))
                 {
-                    loggerConfiguration.WriteTo.Conditional(evt => evt.Level >= logEventLevel, wt => wt.LogAppender(cfg.GetService<LogHttpClient>(), GetHttpContextAccessor));
+                    var logHttpClient = cfg.GetRequiredService<LogHttpClient>();
+                    var principal = cfg.GetRequiredService<IPrincipal>();
+
+                    loggerConfiguration.WriteTo.Conditional(evt => evt.Level >= logEventLevel, wt => wt.LogAppender(principal, logHttpClient, GetHttpContextAccessor));
                 }
 
                 if (logType.HasFlag(LogTypes.FileLogging))
@@ -192,21 +195,21 @@ namespace UNC.Services.Infrastructure
                 };
 
                 return Log.Logger;
-                
-                
-                
+
+
+
             });
 
         }
 
-        public static void RegisterAutoMapper<T>(this IServiceCollection services) where T : class,IAutoMapperService
+        public static void RegisterAutoMapper<T>(this IServiceCollection services) where T : class, IAutoMapperService
         {
             services.AddSingleton<IAutoMapperService, T>();
 
-            
+
         }
 
-        
+
 
 
         /// <summary>
@@ -244,7 +247,7 @@ namespace UNC.Services.Infrastructure
         public static string Decompress(this string compressedString)
         {
             byte[] decompressedBytes;
-            
+
             var compressedStream = new MemoryStream(Convert.FromBase64String(compressedString));
 
             using (var stream = new DeflateStream(compressedStream, CompressionMode.Decompress))
@@ -269,7 +272,7 @@ namespace UNC.Services.Infrastructure
             throw new ArgumentException("Value is not of type IEntityResponse");
         }
 
-        public static T ToTypeFromResponse<T>(this IResponse value) 
+        public static T ToTypeFromResponse<T>(this IResponse value)
         {
             if (value is ITypedResponse<T> entityResponse)
             {

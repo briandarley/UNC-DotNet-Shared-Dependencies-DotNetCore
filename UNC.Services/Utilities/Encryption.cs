@@ -152,7 +152,7 @@ namespace UNC.Services.Utilities
 
                 if (deserialized is null)
                 {
-                    return ErrorResponse("Failed to Deserialize key");
+                    return LogError("Failed to Deserialize key");
                 }
 
                 var key = (RSAParameters)deserialized;

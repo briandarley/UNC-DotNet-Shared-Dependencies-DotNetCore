@@ -16,12 +16,6 @@
   <ItemGroup>
     <PackageReference Include="UNC.Services" Version="*" />
   </ItemGroup>
-  <!--<ItemGroup>
-    <ProjectReference Include="..\UNC.Services\UNC.Services.csproj" />
-  </ItemGroup>-->
-
-  <PropertyGroup>
-    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-  </PropertyGroup>
+  
 
 </Project>

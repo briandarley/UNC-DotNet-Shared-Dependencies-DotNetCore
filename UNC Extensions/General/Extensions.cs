@@ -312,11 +312,11 @@ namespace UNC.Extensions.General
 
             if (claimsPrincipal != null && claimsPrincipal.Claims != null)
             {
-                var sub = claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals("sub"));
+                var userName = claimsPrincipal.Claims.Where(c => c.Type.Equals("sub") || c.Type.Equals("name")).FirstOrDefault(c=> c.Value.HasValue());
 
-                if (sub != null && sub.Value != null)
+                if (userName != null && userName.Value != null)
                 {
-                    return sub.Value;
+                    return userName.Value;
                 }
             }
 

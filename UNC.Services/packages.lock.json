@@ -11,9 +11,20 @@
           "Microsoft.CSharp": "4.7.0"
         }
       },
+      "UNC.Extensions": {
+        "type": "Direct",
+        "requested": "[*, )",
+        "resolved": "2022.4.28.2",
+        "contentHash": "6nerTm9dKgIQBfVuZmQqzZk70+2JZbnzj7SJnckLszQia9/jWb0R92vEVM0sJ7EVL19nhmoSBTiX5f/qVqEm1Q==",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.10",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.10",
+          "Newtonsoft.Json": "13.0.1"
+        }
+      },
       "UNC.LogHandler": {
         "type": "Direct",
-        "requested": "[2022.4.28.2, )",
+        "requested": "[*, )",
         "resolved": "2022.4.28.2",
         "contentHash": "9+h6IMVE6P+YZsCGPi54dadbKIYEvNWG/B3gbNl4kXpsnghonRiBQ6jIppslvS1C+XS6hhprB0C4Qmq0G3G1Kg==",
         "dependencies": {
@@ -304,16 +315,6 @@
         "type": "Transitive",
         "resolved": "4.6.0",
         "contentHash": "4F8Xe+JIkVoDJ8hDAZ7HqLkjctN/6WItJIzQaifBwClC7wmoLSda/Sv2i6i1kycqDb3hWF4JCVbpAweyOKHEUA=="
-      },
-      "UNC.Extensions": {
-        "type": "Transitive",
-        "resolved": "2022.4.28.2",
-        "contentHash": "6nerTm9dKgIQBfVuZmQqzZk70+2JZbnzj7SJnckLszQia9/jWb0R92vEVM0sJ7EVL19nhmoSBTiX5f/qVqEm1Q==",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "5.0.10",
-          "Microsoft.EntityFrameworkCore.Relational": "5.0.10",
-          "Newtonsoft.Json": "13.0.1"
-        }
       }
     }
   }

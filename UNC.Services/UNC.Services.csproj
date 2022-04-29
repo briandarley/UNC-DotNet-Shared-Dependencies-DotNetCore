@@ -6,8 +6,13 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
-    <PackageReference Include="UNC.LogHandler" Version="2022.4.28.2" />
+    <PackageReference Include="UNC.LogHandler" Version="*" />
+    <PackageReference Include="UNC.Extensions" Version="*" />
   </ItemGroup>
+
+  <!--<ItemGroup>
+    <ProjectReference Include="..\UNC Extensions\UNC.Extensions.csproj" />
+  </ItemGroup>-->
 
   
   <!--<PropertyGroup>

@@ -10,9 +10,7 @@
     <Compile Remove="IApiEndPoints.cs" />
     <Compile Remove="LogDependencyOptions.cs" />
   </ItemGroup>
-  <PropertyGroup>
-    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="UNC.Services" Version="*" />
   </ItemGroup>

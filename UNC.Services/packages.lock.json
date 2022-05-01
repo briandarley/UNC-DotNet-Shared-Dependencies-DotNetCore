@@ -14,8 +14,8 @@
       "UNC.Extensions": {
         "type": "Direct",
         "requested": "[*, )",
-        "resolved": "2022.4.28.2",
-        "contentHash": "6nerTm9dKgIQBfVuZmQqzZk70+2JZbnzj7SJnckLszQia9/jWb0R92vEVM0sJ7EVL19nhmoSBTiX5f/qVqEm1Q==",
+        "resolved": "2022.5.1.1",
+        "contentHash": "yldD9uYYw9omsVDuPY4ZicUNJ2ZshKPqXTj+DtvTmRjrsKM3pQIXpunMSTIBQYhPMm0/lQ18LGY28RlBjipE3A==",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.10",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.10",
@@ -25,13 +25,13 @@
       "UNC.LogHandler": {
         "type": "Direct",
         "requested": "[*, )",
-        "resolved": "2022.4.28.2",
-        "contentHash": "9+h6IMVE6P+YZsCGPi54dadbKIYEvNWG/B3gbNl4kXpsnghonRiBQ6jIppslvS1C+XS6hhprB0C4Qmq0G3G1Kg==",
+        "resolved": "2022.5.1.3",
+        "contentHash": "2J7kIJF5NRydxaCgjNN06xXv2ZOd4UAVyRZhmlPnzLC2Y123J3EaVYHBvOpZT9MGwvwDRzV5d7dlxvHG1BnTpw==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.1",
           "Serilog.AspNetCore": "5.0.0",
           "Serilog.Enrichers.Thread": "3.1.0",
-          "UNC.Extensions": "2022.4.28.2"
+          "UNC.Extensions": "2022.4.29.1"
         }
       },
       "Microsoft.CSharp": {

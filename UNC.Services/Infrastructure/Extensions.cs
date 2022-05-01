@@ -113,10 +113,8 @@ namespace UNC.Services.Infrastructure
         /// <param name="logType"></param>
         public static void RegisterCustomLogging(this IServiceCollection services, IConfiguration configuration, LogTypes logType)
         {
-            services.AddSingleton(cfg =>
+            services.AddSingleton<SeriLogSettings>(cfg =>
             {
-                //AuthUser => Principal?.Identity?.Name
-
                 var appName = configuration.GetValue<string>("Application");
 
                 var filePath = configuration.GetValue<string>("Serilog:LogFilePath");
@@ -126,11 +124,21 @@ namespace UNC.Services.Infrastructure
                 var logEventLevel = configuration.GetValue<LogEventLevel>("Serilog:MinimumLevel");
                 var outputTemplate = "===> {Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}";
 
-                //string GetPrincipalIdentityName()
-                //{
-                //    var principal = cfg.GetService<IPrincipal>();
-                //    return principal.Identity.Name;
-                //}
+
+                return new SeriLogSettings
+                {
+                    LogFilePath = filePath,
+                    ApplicationName = appName,
+                    LogEventLevel = logEventLevel,
+                    OutputTemplate = outputTemplate
+                };
+            });
+
+            services.AddTransient(cfg =>
+            {
+                var seriLogSettings = cfg.GetRequiredService<SeriLogSettings>();
+
+                
                 IHttpContextAccessor GetHttpContextAccessor()
                 {
 
@@ -154,7 +162,7 @@ namespace UNC.Services.Infrastructure
                     .ReadFrom.Configuration(configuration)
                     .Enrich.WithThreadId()
 
-                    .Enrich.WithProperty("Application", appName)
+                    .Enrich.WithProperty("Application", seriLogSettings.ApplicationName)
                     //.Enrich.WithProperty("AuthUser", principal.Identity.Name)
                     .Enrich.WithProperty("AppSource", appSource)
                     .Enrich.WithProperty("ServiceAccount", serviceAccount)
@@ -166,22 +174,22 @@ namespace UNC.Services.Infrastructure
                     var logHttpClient = cfg.GetRequiredService<LogHttpClient>();
                     var principal = cfg.GetRequiredService<IPrincipal>();
 
-                    loggerConfiguration.WriteTo.Conditional(evt => evt.Level >= logEventLevel, wt => wt.LogAppender(principal, logHttpClient, GetHttpContextAccessor));
+                    loggerConfiguration.WriteTo.Conditional(evt => evt.Level >= seriLogSettings.LogEventLevel, wt => wt.LogAppender(principal, logHttpClient, GetHttpContextAccessor));
                 }
 
                 if (logType.HasFlag(LogTypes.FileLogging))
                 {
-                    loggerConfiguration.WriteTo.File(filePath,
-                        logEventLevel,
+                    loggerConfiguration.WriteTo.File(seriLogSettings.LogFilePath,
+                        seriLogSettings.LogEventLevel,
                         fileSizeLimitBytes: 5000000,
                         rollOnFileSizeLimit: true,
                         retainedFileCountLimit: 10,
-                        outputTemplate: outputTemplate);
+                        outputTemplate: seriLogSettings.OutputTemplate);
                 }
 
                 if (logType.HasFlag(LogTypes.ConsoleLogging))
                 {
-                    loggerConfiguration.WriteTo.Console(logEventLevel);
+                    loggerConfiguration.WriteTo.Console(seriLogSettings.LogEventLevel);
                 }
 
 

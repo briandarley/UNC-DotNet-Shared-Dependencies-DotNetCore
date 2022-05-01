@@ -153,6 +153,7 @@ namespace UNC.Services
         {
             var logEntry = InitializeLogEntry(callerName, sourcePath, sourceLineNumber);
             logEntry.Level = LogEventLevel.Error.ToString();
+            
 
             var sb = new StringBuilder(message);
 

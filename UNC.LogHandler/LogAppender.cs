@@ -75,7 +75,11 @@ namespace UNC.LogHandler
                     //Todo, we may want to use client id to discern which client made the request (Test console app, Production App) ClientId is set in the configuration file
                     //var clientId = headerList.SingleOrDefault(c => c.Key == "CLIENT_ID").Value;
                     appSource = headerList.SingleOrDefault(c => c.Key == "APPLICATION_NAME").Value;
-                    authUser = headerList.SingleOrDefault(c => c.Key == "AUTH_USER").Value;
+                    if (appSource != null)
+                    {
+                        authUser = headerList.SingleOrDefault(c => c.Key == "AUTH_USER").Value;
+                    }
+                    
 
                 }
 

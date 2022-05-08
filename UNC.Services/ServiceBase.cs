@@ -236,7 +236,7 @@ namespace UNC.Services
             var logEntry = InitializeLogEntry(callerName, sourcePath, sourceLineNumber);
             logEntry.Level = LogEventLevel.Error.ToString();
 
-            var sb = new StringBuilder($"Unexpected Error calling {callerName}. Exception Type: {ex.GetType()} ");
+            var sb = new StringBuilder($"Unexpected Error calling {callerName}. Exception Type: {ex.GetType()}. ");
             sb.Append(ex.Message);
 
             if (ex.InnerException != null)

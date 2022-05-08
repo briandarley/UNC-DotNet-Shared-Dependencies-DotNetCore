@@ -207,6 +207,7 @@ namespace UNC.Services
             var activityMessage = InitializeActivityMessage(callerName, sourcePath, sourceLineNumber, pathUri);
 
             var sbError = new StringBuilder();
+            sbError.AppendLine($"Exception type: {ex.GetType()} ");
             sbError.AppendLine(ex.Message);
 
             if (ex.InnerException != null)
@@ -226,7 +227,7 @@ namespace UNC.Services
             {
                 throw ex;
             }
-            var response = new ExceptionResponse($"Unexpected Error calling {callerName}", ex);
+            var response = new ExceptionResponse($"Unexpected Error calling {callerName} ", ex);
 
             return response;
         }
